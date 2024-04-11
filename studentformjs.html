@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1 style="text-align: center;">STUDENT FORM</h1>
+   <div style="display: flex; justify-content: center; align-items: center;">
+    <form>
+      <table border="1" >
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td><input id="nameinput" /></td>
+          </tr>
+
+          <tr>
+            <td>Age</td>
+            <td><input type="number" id="ageinput" /></td>
+          </tr>
+
+          <tr>
+            <td>Gender</td>
+            <td id="findgender">
+              <input type="radio" id="gender1" name="gendername" />
+              <label for="gender1">Male</label>
+
+              <input type="radio" id="gender2" name="gendername" />
+              <label for="gender2">Female</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Course</td>
+            <td>
+              <select id="dropdown">
+                <option hidden disabled>Select</option>
+                <option value="Javascript">Javascript</option>
+                <option value="Python">Python</option>
+                <option value="C++">C++</option>
+              </select>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Email</td>
+            <td><input type="email" id="inputemail" /></td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input type="button" value="save" onclick="saveclick()" style="background-color: blue; color: aliceblue;"/>
+              <!---Here use input type button do not use button tag.its not working-->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+    <!---------------------------------------table2---------------------------------------------------------------->
+    <div style="display: flex; justify-content: center; align-items: center;">
+    <table border="1" style="margin-top: 100px">
+      <thead>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>COURSE</th>
+        <th>GENDER</th>
+        <th>EMAIL</th>
+        <th>ACTION</th>
+      </thead>
+
+      <tbody id="alltable">
+        <tr>
+          <td>Amal</td>
+          <td>22</td>
+          <td>Javascript</td>
+          <td>Male</td>
+          <td>Amal@gmail.com</td>
+          <td>
+            <input type="button" value="Delete" onclick="deleteitem(event)" style="background-color: red; color: aliceblue;"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+    <!-----------------------------------------------------js--------------------------------------------------------------->
+    <script>
+      var entername = document.getElementById("nameinput");
+      var enterage = document.getElementById("ageinput");
+      var tableitem = document.getElementById("alltable");
+      var gendername = document.getElementById("findgender");
+      var email = document.getElementById("inputemail");
+
+      function saveclick() {
+        var row = document.createElement("tr");
+        tableitem.append(row);
+
+        var item1 = document.createElement("td");
+        row.append(item1);
+
+        var item2 = document.createElement("td");
+        row.append(item2);
+
+        var item3 = document.createElement("td");
+        row.append(item3);
+
+        var item4 = document.createElement("td");
+        row.append(item4);
+
+        var item5 = document.createElement("td");
+        row.append(item5);
+
+        var item6 = document.createElement("td"); // first create td
+        item6.innerHTML = 
+          "<input type='button' value='Delete' onclick='deleteitem(event)' style='background-color: red; color: aliceblue;'/>";   //create button tag
+        row.append(item6);                           //append or put it in (tr)
+
+        item1.textContent = entername.value;
+        item2.textContent = enterage.value;
+
+        // Gender
+
+        var genderinput = document.getElementsByName("gendername");
+      
+
+        if (genderinput[0].checked) {
+          item4.textContent = "Male";
+        } else if (genderinput[1].checked) {
+          item4.textContent = "Female";
+        }
+
+        //course
+
+        var dropdownitem = document.getElementById("dropdown");
+        item3.textContent = dropdownitem.value;
+
+        //email
+
+        item5.textContent = email.value;
+
+        //delete
+      }
+
+      function deleteitem(event) {
+        //var td = event.target.parentNode;
+        //var tr = td.parentNode; // the row to be removed
+        //tr.parentNode.removeChild(tr);
+
+        var coldelete= event.target.parentElement  //first input button (td)
+        var rowdelete=coldelete.parentElement      //select input button's parent(tr)
+        rowdelete.remove()                         // delete row
+      }
+    </script>
+  </body>
+</html>
